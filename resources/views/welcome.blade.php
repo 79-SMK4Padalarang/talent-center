@@ -178,11 +178,14 @@
                 <h3 class="txt mb-10 text-center font-sans text-3xl font-bold text-white sm:text-4xl lg:text-5xl">Build
                     the Perfect Team <br class="mb-5" />For the Brighter Future</h3>
 
+
                 <div class="flex justify-center mb-3">
-                    <form id="updateForm" action="api/tags-management/tags-option-list"
+                    <form id="updateForm" action="{{ route('update.search') }}" method="POST"
                         method="get"class="w-1/2 appearance-none rounded-full border px-8 leading-tight text-gray-700 shadow focus:outline-none bg-white">
-                        <input class="w-3/4 py-3 focus:outline-none focus-visible:outline-none" id="search"
-                            name = "skillset" type="text" id="title box" type="text"
+                        @csrf
+                        @method('PUT')
+                        <input class="w-3/4 py-3 focus:outline-none focus-visible:outline-none" id="search-bar"
+                            name = "search-bar" type="text" id="title box" type="text"
                             placeholder="Try 'ReactJS'" />
                         <button class=" border-none float-right" type="submit">
                             <div class="grid place-items-center h-full w-12 text-grey3 p-3">
@@ -196,29 +199,15 @@
                         <div id="autocomplete-results"></div>
                     </form>
                 </div>
-
-                <div class="flex justify-center gap-2">
+                <div class="flex justify-center gap-2" id="button-container">
                     <p class="py-2 px-4 rounded text-white">Popular</p>
-                    <button class="bg-white hover:bg-gray-400 text-gray-800 py-2 px-8 rounded">
-                        ReactJs
-                    </button>
-                    <button class="bg-white hover:bg-gray-400 text-gray-800 py-2 px-8 rounded">
-                        Java
-                    </button>
-                    <button class="bg-white hover:bg-gray-400 text-gray-800 py-2 px-4 rounded">
-                        Spring Boot
-                    </button>
-                    <button class="bg-white hover:bg-gray-400 text-gray-800 py-2 px-8 rounded">
-                        C + +
-                    </button>
-                    <button class="bg-white hover:bg-gray-400 text-gray-800 py-2 px-8 rounded">
-                        Katalon
-                    </button>
                 </div>
-            </div>
+
+
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
+                //Login Pop-Up
                 const toggleButton = document.querySelector('#toggle-password-button');
                 const passwordField = document.querySelector('#password');
                 const closedEye = document.querySelector('#closed-eye');
@@ -240,7 +229,7 @@
                     }
                     isPasswordHidden = !isPasswordHidden;
                 });
-
+                //Animation Text
                 $(document).ready(function() {
                     var lines = $(".txt");
                     var i = -1;
@@ -259,7 +248,49 @@
                 if (errorMessage) {
                     my_modal_1.showModal();
                 }
-            </script>
+// Function to fetch data from the API and create toggleable buttons
+  function fetchDataAndCreateButtons() {
+  fetch('http://127.0.0.1:8000/api/tags-management/popular-tags-option-lists')
+      .then(response => response.json())
+      .then(data => {
+          const buttonContainer = document.getElementById('button-container');
+          const searchBar = document.getElementById('search-bar');
+
+          data.forEach(item => {
+              const button = document.createElement('button');
+              button.textContent = item.skillset_name;
+
+              // Add classes to the button
+              button.className = 'bg-white hover:bg-gray-400 text-gray-800 py-2 px-4 rounded';
+
+              // Add click event to toggle class and update search bar
+              button.onclick = function() {
+                  button.classList.toggle('selected');
+
+                  // Update search bar based on button's selection state
+                  if (button.classList.contains('selected')) {
+                      searchBar.value += (searchBar.value === '' ? '' : ', ') + item.skillset_name;
+                  } else {
+                      const valueArray = searchBar.value.split(', ');
+                      const index = valueArray.indexOf(item.skillset_name);
+                      if (index !== -1) {
+                          valueArray.splice(index, 1);
+                          searchBar.value = valueArray.join(', ');
+                      }
+                  }
+              };
+
+              buttonContainer.appendChild(button);
+          });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+}
+
+// Call the function when the page is loaded
+fetchDataAndCreateButtons();
+
+
+</script>
     </section>
     <!---Hero section end--->
     <!--Footer Start-->
