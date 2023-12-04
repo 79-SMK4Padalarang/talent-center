@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/tags-management/tags-option-list', [SearchController::class, 'results']);
 Route::get('/suggestion', [SearchController::class, 'index']);
 Route::post('/user-management/users/sign-in', [LoginController::class, 'authenticate']);
+Route::post('/user-management/users/register', [RegisterController::class, 'register']);
