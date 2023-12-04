@@ -7,10 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
+use App\Models\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
+use App\Models\Client;
+use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = "user";
+    protected $connection = 'pgsql';
+    public $incrementing = false;
+    protected $primaryKey = "user_id";
+    protected $guarded = ["user_id"];
+    protected $keyType = 'string';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +30,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id', 'first_name', 'last_name', 'email', 'password'
     ];
 
     /**
@@ -42,4 +52,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public $timestamps = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->{$model->getKeyName()} = (string) Uuid::uuid4();
+        });
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class, 'user_id');
+    }
 }
