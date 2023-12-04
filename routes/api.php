@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PtagsController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::put('/tags-management/tags-option-list', [SearchController::class, 'searc
 Route::get('/suggestion', [SearchController::class, 'index']);
 Route::post('/user-management/users/sign-in', [LoginController::class, 'authenticate']);
 Route::apiResource('/tags-management/popular-tags-option-lists', PtagsController::class);
+Route::post('/user-management/users/register', [RegisterController::class, 'register']);
