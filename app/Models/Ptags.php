@@ -12,6 +12,8 @@ class Ptags extends Model
     protected $connection = 'pgsql';
     protected $primaryKey = 'most_frequent_skillset_id';
     protected $fillable = ['most_frequent_skillset_id','skillset_id', 'counter' /* other fillable fields */];
+    const CREATED_AT = 'created_time';
+    const UPDATED_AT = 'last_modified_time';
     public function skillsets()
     {
         return $this->belongsTo(Skillset::class,'skillset_id');

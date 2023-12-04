@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Search;
+use Ramsey\Uuid\Uuid;
+use App\Models\Ptags;
+use Illuminate\Support\Facades\Redirect;
 
 class SearchController extends Controller
 {
