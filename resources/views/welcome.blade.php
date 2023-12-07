@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/EasePack.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://repo.rachmat.id/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
     <style>
         .hide {
             display: none;
@@ -181,7 +182,7 @@
                 <div class="flex justify-center mb-3">
                     <form id="updateForm" action="api/tags-management/tags-option-list"
                         method="get"class="w-1/2 appearance-none rounded-full border px-8 leading-tight text-gray-700 shadow focus:outline-none bg-white">
-                        <input class="w-3/4 py-3 focus:outline-none focus-visible:outline-none" id="search"
+                        <input class="w-4/5 py-3 focus:outline-none focus-visible:outline-none" id="search"
                             name = "skillset" type="text" id="title box" type="text"
                             placeholder="Try 'ReactJS'" />
                         <button class=" border-none float-right" type="submit">
@@ -260,6 +261,9 @@
                     my_modal_1.showModal();
                 }
             </script>
+             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+             <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+             <script src="{{ asset('js/jquery.js') }}" defer></script>
     </section>
     <!---Hero section end--->
     <!--Footer Start-->
@@ -341,7 +345,4 @@
         </div>
     </footer>
     <!--Footer End-->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
 </body>
