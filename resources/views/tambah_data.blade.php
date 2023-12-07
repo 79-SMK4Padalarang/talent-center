@@ -182,44 +182,61 @@
     </div>
     </div>
 
-    <form>
-        <div class="grid gap-6 mb-6 md:grid-cols-2">
+    
+        <!-- component -->
+<!-- This is an example component -->
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.3.x/dist/index.js"></script>
+
+
+<div x-data="{photoName: null, photoPreview: null}" class="col-span-6 ml-2 sm:col-span-4 md:mr-3">
+    <!-- Photo File Input -->
+    <input type="file" class="hidden" x-ref="photo" x-on:change="
+                        photoName = $refs.photo.files[0].name;
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            photoPreview = e.target.result;
+                        };
+                        reader.readAsDataURL($refs.photo.files[0]);
+    ">
+
+
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
             <div class="flex ml-[300px]">
                 <div class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <div class="pl-0">
-                        <div
-                            class="w-96 h-60 px-6 pt-6 bg-white rounded-xl flex-col justify-start items-start inline-flex">
-                            <div
-                                class="Frame678 self-stretch pb-5 border-b border-gray-100 justify-between items-start inline-flex">
-                                <div class="Frame673 justify-start items-center gap-10 flex">
-                                    <div class="Frame156 justify-end items-end gap-2.5 flex">
-                                        <div class="flex-col justify-center items-center gap-1 inline-flex">
-                                            <img class="w-24 h-24 rounded-xl flex-col justify-center items-center gap-2.5 flex"
-                                                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80">
-                                            <div
-                                                class="MediumButtonsAndStates justify-center items-center inline-flex">
-                                                <div
-                                                    class="flex items-center p-5 px-2.5 py-2 border-gray-200 rounded-lg dark:border-gray-600">
-                                                    <div class="relative">
-                                                     <input type="file" class="hidden" id="fileInput">
-                                                     <label for="fileInput" class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">
-                                                       Upload New Photo
-                                                        </label>
-                                                        </div>
-
-                                                    
-                                                        
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex-col justify-start items-start gap-5 inline-flex">
-                                        <div class="justify-start items-center gap-5 inline-flex">
-                                            <div class="text-gray-700 text-2xl font-bold">Jude Belligham</div>
+                        <div>
+                    
+    
+    <div class="text-center">
+        <!-- Current Profile Photo -->
+        <div class="mt-7 mr-[110vh]" x-show="! photoPreview">
+            <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+             class="mr-[112vh] w-28 h-28 m-auto rounded-md shadow">
+        </div>
+        <!-- New Profile Photo Preview -->
+        <div class="mt-7 ml-8 " x-show="photoPreview" style="display: none;">
+            <span class=" block w-28 h-28 rounded-md shadow" x-bind:style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"
+             style="background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('null');">
+            </span>
+        </div>
+        <button type="button" class="mr-[112vh] inline-flex items-center px-4 py-2 bg-blue-600 rounded-md text-sm text-white font-normal shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
+            Upload New Photo
+        </button>
+    </div>
+</div>
+     </div>
+        </div>
+            </div>
+             
+                                        <div class=" items-center gap-4 inline-flex">
+                                            <div class=" text-gray-700 text-2xl font-bold">Jude Belligham</div>
                                             <div class="justify-start items-start gap-5 flex">
-                                                <div class="h-6 justify-start items-start gap-52 flex">
+                                             <div class="h-6 justify-start items-start gap-52 flex">
                                                     <div
-                                                        class="w-20 px-5 py-2 bg-green-600 rounded-full justify-center items-center gap-2 flex">
+                                                        class=" w-20 px-5 py-2 bg-green-600 rounded-full justify-center items-center gap-2 flex">
                                                         <div class="text-white font-semibold text-xs">
                                                             Active</div>
                                                     </div>
@@ -230,26 +247,27 @@
                                                         <div class="text-white text-xs font-semibold">
                                                             On Site</div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                               
                                     </div>
                                 </div>
-                                <div class="flex ml-[350px]">
+                                <div class="flex ml-[100px]">
                                     <div class="justify-center items-center flex">
                                         <div>
                                             <a href="detail_talent.blade.php"><i type="submit"
-                                                class="font-semibold px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Simpan
-                                                Perubahan</i></a>
+                                                    class="font-semibold px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Simpan
+                                                    Perubahan</i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                        <div class="flex ml-[320px]">
+
                             <div class="justify-start items-start gap-14 inline-flex">
                                 <div class="justify-start items-start flex">
                                     <div
                                         class="py-1 border-b-2 border-blue-500 justify-center items-center gap-5 flex">
-                                        <a href="tambah_data.blade.php" class="text-blue-500 text-base font-medium">Profile
+                                        <a href="tambah_data.blade.php"
+                                            class="text-blue-500 text-base font-medium">Profile
                                         </a>
                                     </div>
                                 </div>
@@ -289,7 +307,7 @@
                             </div>
 
                             <div>
-                                <div class="text-base font-semibold">Jenis Kelamin</div>
+                                <div class="mt-4 text-base font-semibold">Jenis Kelamin</div>
                                 <div class="flex">
                                     <div class="mr-10">
                                         <input id="mt-2 default-radio-1" type="radio" value=""
@@ -414,322 +432,255 @@
 
 
                             <div>
-                                <br scope="row">
-                                <div class="text-base font-semibold">Deskripsi Talent</div>
-                                </th>
-                                <div class="Frame650 self-stretch flex-col justify-start items-start flex">
-                                    <div
-                                        class="ConfigText self-stretch bg-white rounded-tl-md rounded-tr-md border-slate-200 justify-start items-center gap-5 inline-flex">
-                                        <div class="w-full max-w-6xl mx-auto rounded-xl bg-white shadow-lg p-5 text-black"
-                                            x-data="app()" x-init="init($refs.wysiwyg)">
-                                            <div class="border border-gray-200 overflow-hidden rounded-md">
-                                                <div
-                                                    class="w-full flex border-b border-gray-200 text-xl text-gray-600">
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('bold')">
-                                                        <i class="mdi mdi-format-bold"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('italic')">
-                                                        <i class="mdi mdi-format-italic"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('underline')">
-                                                        <i class="mdi mdi-format-underline"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('formatBlock','P')">
-                                                        <i class="mdi mdi-format-paragraph"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('formatBlock','H1')">
-                                                        <i class="mdi mdi-format-header-1"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('formatBlock','H2')">
-                                                        <i class="mdi mdi-format-header-2"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('formatBlock','H3')">
-                                                        <i class="mdi mdi-format-header-3"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('insertUnorderedList')">
-                                                        <i class="mdi mdi-format-list-bulleted"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('insertOrderedList')">
-                                                        <i class="mdi mdi-format-list-numbered"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('justifyLeft')">
-                                                        <i class="mdi mdi-format-align-left"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('justifyCenter')">
-                                                        <i class="mdi mdi-format-align-center"></i>
-                                                    </button>
-                                                    <button
-                                                        class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                        @click="format('justifyRight')">
-                                                        <i class="mdi mdi-format-align-right"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="w-full">
-                                                    <iframe x-ref="wysiwyg"
-                                                        class="w-full h-50 overflow-y-auto"></iframe>
-                                                </div>
-                                            </div>
+
+
+                                <label for="message"
+                                    class="mt-7 block mb-2 text-sm text-base font-semibold text-gray-900 dark:text-white">Deskripsi
+                                    Talent</label>
+                                <textarea id="message" rows="4"
+                                    class="block p-6 w-11/12 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Write your thoughts here..."></textarea>
+
+
+                                <div class="" x-data="app()" x-init="init($refs.wysiwyg)">
+                                    <div class="border border-gray-200 overflow-hidden rounded-md">
+
+
+                                        <div class="">
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
 
 
-                                    <div>
-                                        <br scope="row"
-                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                        <div class="text-base font-semibold">
-                                            <p>Upload CV</p>
-                                        </div>
-                                        </th>
-                                        <div class="bg-white">
-                                            <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
-                                                <div class="md:flex">
-                                                    <div class="w-full p-3">
-                                                        <div
-                                                            class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                            <div>
+                                <br scope="row"
+                                    class=" flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                <div class="text-base font-semibold">
+                                    <p>Upload CV</p>
+                                </div>
+                                </th>
+                                <div class="bg-white">
+                                    <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+                                        <div class="md:flex">
+                                            <div class=" w-70 p-5">
+                                                <div
+                                                    class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
 
-                                                            <div class="absolute">
+                                                    <div class="absolute">
 
-                                                                <div class="flex flex-col items-center">
-                                                                    <i
-                                                                        class="fa fa-folder-open fa-4x text-blue-700"></i>
-                                                                    <span
-                                                                        class="block text-gray-400 font-normal">Attach
-                                                                        you files
-                                                                        here</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <input type="file" class="h-full w-full opacity-0"
-                                                                name="">
-
+                                                        <div class="flex flex-col items-center">
+                                                            <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                                                            <span class="block text-gray-400 font-normal">Attach
+                                                                you files
+                                                                here</span>
                                                         </div>
                                                     </div>
+
+                                                    <input type="file" class="h-full w-full opacity-0"
+                                                        name="">
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
 
-                                    <div>
-                                        <div class="text-base font-semibold">Skill set</div>
+                            <div>
+                                <div class="text-base font-semibold">Skill set</div>
+                                <div class="flex">
+                                    <div class="mr-10">
+
+
+                                        <div class="bg-gray text-gray-600">pilih lebih dari 1</div>
                                         <div class="flex">
                                             <div class="mr-10">
 
 
-                                                <div class="bg-gray text-gray-600">pilih lebih dari 1</div>
                                                 <div class="flex">
-                                                    <div class="mr-10">
 
 
-                                                        <div class="flex">
+                                                    <div class="flex">
+                                                        <div class="mr-10">
+                                                            <input id="mt-5 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Java</label>
 
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Java
+                                                                Script</label>
 
-                                                            <div class="flex">
-                                                                <div class="mr-10">
-                                                                    <input id="mt-5 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Java</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Php</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Java
-                                                                        Script</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">c#</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value=""
-                                                                        class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Php</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">c++</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">c#</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Spring</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">c++</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">React</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value=""
-                                                                        class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Spring</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Vue</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value=""
-                                                                        class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">React</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="default-radio-1"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">laravel</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Vue</label>
+                                                            <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                value=""
+                                                                class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                            <label for="checkboxChecked"
+                                                                class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Srum
+                                                                Master</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value="" 
-                                                                        class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="default-radio-1"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">laravel</label>
+                                                            <div class="mr-10">
+                                                                <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                    value=""
+                                                                    class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                <label for="dcheckboxChecked"
+                                                                    class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Back-End</label>
 
-                                                                    <input id="mt-2 checkboxChecked" type="checkbox"
-                                                                        value=""
-                                                                        class="ml-6 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                    <label for="checkboxChecked"
-                                                                        class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Srum
-                                                                        Master</label>
+                                                                <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                    value=""
+                                                                    class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                <label for="checkboxChecked"
+                                                                    class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Front-Ent</label>
 
-                                                                    <div class="mr-10">
-                                                                        <input id="mt-2 checkboxChecked"
-                                                                            type="checkbox"
-                                                                             value=""
-                                                                            class=" w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                        <label for="dcheckboxChecked"
-                                                                            class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Back-End</label>
+                                                                <input id="mt-2 checkboxChecked" type="checkbox"
+                                                                    value=""
+                                                                    class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                                <label for="checkboxChecked"
+                                                                    class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Analysis</label>
 
-                                                                        <input id="mt-2 checkboxChecked"
-                                                                            type="checkbox"
-                                                                             value=""
-                                                                            class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                        <label for="checkboxChecked"
-                                                                            class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Front-Ent</label>
-
-                                                                        <input id="mt-2 checkboxChecked"
-                                                                            type="checkbox"
-                                                                            value=""
-                                                                            class="ml-8 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                                        <label for="checkboxChecked"
-                                                                            class="ms-1 font-semibold text-gray-900 dark:text-gray-300">Analysis</label>
-
-                                                                        <div class="flex">
-                                                                            <div class="mr-4">
-                                                                                <label for="input1"
-                                                                                    class="mt-5 block font-semibold text-gray-700">Pengalaman</label>
-                                                                                <input type="text" id="first_name"
-                                                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[85vh] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                                    placeholder="Masukkan Tahun Pengalaman"
-                                                                                    required>
-                                                                            </div>
-
-
-                                                                            <div>
-                                                                                <label for="input2"
-                                                                                    class="mt-5 block font-semibold text-gray-700">Level</label>
-                                                                                <input type="text" id="first_name"
-                                                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[85vh] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                                    placeholder="Select Client Level"
-                                                                                    required>
-                                                                            </div>
-                                                                        </div>
+                                                                <div class="flex">
+                                                                    <div class="mr-4">
+                                                                        <label for="input1"
+                                                                            class="mt-5 block font-semibold text-gray-700">Pengalaman</label>
+                                                                        <input type="text" id="first_name"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[85vh] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                            placeholder="Masukkan Tahun Pengalaman"
+                                                                            required>
                                                                     </div>
 
 
-
-                                                                    <tr
-                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                                        <td class="w-4 p-4">
-                                                                            <div class="flex items-center">
-                                                                            </div>
-                                                                        </td>
-                                                                        <br scope="row"
-                                                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                                        <div class="text-base font-semibold">
-                                                                            <p>E-mail</p>
-                                                                        </div>
-                                                                        </th>
-                                                                        <div
-                                                                            class="Inputs w-full h-10  bg-slate-100 rounded-md justify-start items-center inline-flex">
-                                                                            <input type="text" id="first_name"
-                                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                                placeholder="Masukkan E-mail" required>
-
-                                                                        </div>
+                                                                    <div>
+                                                                        <label for="input2"
+                                                                            class="mt-5 block font-semibold text-gray-700">Level</label>
+                                                                        <input type="text" id="first_name"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[85vh] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                            placeholder="Select Client Level" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
 
 
-                                                                    <tr
-                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                                        <td class="w-4 p-4">
-                                                                            <div class="flex items-center">
-                                                                            </div>
-                                                                        </td>
-                                                                        <br scope="row"
-                                                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                                        <div class="text-base font-semibold">
-                                                                            <p>No. Hp/Whatssapp</p>
-                                                                        </div>
-                                                                        </th>
-                                                                        <div
-                                                                            class="Inputs w-full h-10 bg-slate-100 rounded-md justify-start items-center inline-flex">
-                                                                            <input type="text" id="first_name"
-                                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                                placeholder="Masukkan No. Hp/Whatssapp"
-                                                                                required>
-                                                                        </div>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                                <td class="w-4 p-4">
+                                                                    <div class="flex items-center">
+                                                                    </div>
+                                                                </td>
+                                                                <br scope="row"
+                                                                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                                                <div class="text-base font-semibold">
+                                                                    <p>E-mail</p>
+                                                                </div>
+                                                                </th>
+                                                                <div
+                                                                    class="Inputs w-full h-10  bg-slate-100 rounded-md justify-start items-center inline-flex">
+                                                                    <input type="text" id="first_name"
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                        placeholder="Masukkan E-mail" required>
+
+                                                                </div>
+
+
+
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                                <td class="w-4 p-4">
+                                                                    <div class="flex items-center">
+                                                                    </div>
+                                                                </td>
+                                                                <br scope="row"
+                                                                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                                                <div class="text-base font-semibold">
+                                                                    <p>No. Hp/Whatssapp</p>
+                                                                </div>
+                                                                </th>
+                                                                <div
+                                                                    class="Inputs w-full h-10 bg-slate-100 rounded-md justify-start items-center inline-flex">
+                                                                    <input type="text" id="first_name"
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                        placeholder="Masukkan No. Hp/Whatssapp"
+                                                                        required>
+                                                                </div>
 
 
 
 
-                                                                    <tr
-                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                                        <td class="w-4 p-4">
-                                                                            <div class="flex items-center">
-                                                                            </div>
-                                                                        </td>
-                                                                        <br scope="row"
-                                                                            class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                                        <div class="text-base font-semibold">
-                                                                            <p>Biografi Video (Opsional)</p>
-                                                                        </div>
-                                                                        </th>
-                                                                        <div
-                                                                            class="Inputs w-full h-10  bg-slate-100 rounded-md justify-start items-center inline-flex">
-                                                                            <input type="text" id="first_name"
-                                                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                                placeholder="Masukkan URL Video"
-                                                                                required>
-                                                                        </div>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                                <td class="w-4 p-4">
+                                                                    <div class="flex items-center">
+                                                                    </div>
+                                                                </td>
+                                                                <br scope="row"
+                                                                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                                                <div class="text-base font-semibold">
+                                                                    <p>Biografi Video (Opsional)</p>
+                                                                </div>
+                                                                </th>
+                                                                <div
+                                                                    class="Inputs w-full h-10  bg-slate-100 rounded-md justify-start items-center inline-flex">
+                                                                    <input type="text" id="first_name"
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                        placeholder="Masukkan URL Video" required>
+                                                                </div>
 
-                                                                    </tr>
-                                                                    
+                                                            </tr>
+
 
         </form>
         <!-- Modal footer -->
         <div class="ml-[130vh] flex items-center p-5 border-gray-200 rounded-lg dark:border-gray-600">
-           <a href="detail_talent.blade.php"><i type="submit"
-         class="px-4 py-2 w-30 text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800">SimpanPerubahan</i></a>
+            <a href="detail_talent.blade.php"><i type="submit"
+                    class="px-4 py-2 w-30 text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800">SimpanPerubahan</i></a>
             <button type="submit"
                 class="px-4 py-2 w-20 text-white bg-stone-300 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-stone-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-stone-600 dark:hover:bg-stone-700 dark:focus:ring-stone-800">
                 Batal</button>
@@ -737,8 +688,4 @@
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 
-        <script>
-            
-           
-          
-        </script>
+        <script></script>

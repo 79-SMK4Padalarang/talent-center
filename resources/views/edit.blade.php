@@ -191,6 +191,7 @@
                             <div class="text-center">
                                 <img class="mx-auto h-12 w-12"
                                     src="https://www.svgrepo.com/show/357902/image-upload.svg" alt="">
+                                        
 
                                 <h3 class="mt-2 text-sm font-medium text-gray-900">
                                     <label for="file-upload" class="relative cursor-pointer">
@@ -223,7 +224,7 @@
                         </div>
 
                         <div>
-                            <div class="text-base font-semibold">Jenis Kelamin</div>
+                            <div class="mt-5 ext-base font-semibold">Jenis Kelamin</div>
                             <div class="flex">
                                 <div class="mr-10">
                                     <input id="mt-2 default-radio-1" type="radio" value=""
@@ -347,84 +348,27 @@
 
 
                         <div>
-                            <br scope="row">
-                            <div class="text-base font-semibold">Deskripsi Talent</div>
-                            </th>
+                            <label for="message"
+                                    class="mt-7 block mb-2 text-sm text-base font-semibold text-gray-900 dark:text-white">Deskripsi
+                                    Talent</label>
+                                <textarea id="message" rows="4"
+                                    class="block p-6 w-11/12 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Write your thoughts here..."></textarea>
+
+
                             <div class="Frame650 self-stretch flex-col justify-start items-start flex">
                                 <div
                                     class="ConfigText self-stretch bg-white rounded-tl-md rounded-tr-md border-slate-200 justify-start items-center gap-5 inline-flex">
-                                    <div class="w-full max-w-6xl mx-auto rounded-xl bg-white shadow-lg p-5 text-black"
+                                    <div class
                                         x-data="app()" x-init="init($refs.wysiwyg)">
                                         <div class="border border-gray-200 overflow-hidden rounded-md">
-                                            <div class="w-full flex border-b border-gray-200 text-xl text-gray-600">
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('bold')">
-                                                    <i class="mdi mdi-format-bold"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('italic')">
-                                                    <i class="mdi mdi-format-italic"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('underline')">
-                                                    <i class="mdi mdi-format-underline"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('formatBlock','P')">
-                                                    <i class="mdi mdi-format-paragraph"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('formatBlock','H1')">
-                                                    <i class="mdi mdi-format-header-1"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('formatBlock','H2')">
-                                                    <i class="mdi mdi-format-header-2"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('formatBlock','H3')">
-                                                    <i class="mdi mdi-format-header-3"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('insertUnorderedList')">
-                                                    <i class="mdi mdi-format-list-bulleted"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('insertOrderedList')">
-                                                    <i class="mdi mdi-format-list-numbered"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('justifyLeft')">
-                                                    <i class="mdi mdi-format-align-left"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('justifyCenter')">
-                                                    <i class="mdi mdi-format-align-center"></i>
-                                                </button>
-                                                <button
-                                                    class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50"
-                                                    @click="format('justifyRight')">
-                                                    <i class="mdi mdi-format-align-right"></i>
-                                                </button>
+                                            
                                             </div>
-                                            <div class="w-full">
-                                                <iframe x-ref="wysiwyg" class="w-full h-50 overflow-y-auto"></iframe>
+                                            <div class="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
 
                                 
                                 <div>
@@ -437,7 +381,7 @@
                                     <div class="bg-white">
                                         <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
                                             <div class="md:flex">
-                                                <div class="w-full p-3">
+                                                <div class="w-70 p-5">
                                                     <div
                                                         class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-grayi-100 flex justify-center items-center">
 

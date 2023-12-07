@@ -157,7 +157,7 @@
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
+                        </svg><Var></Var>
                     </div>
                     <input type="search" id="default-search"
                         class="block w-full p-4 pl-10 text-sm text-gray-900 border border-blue-500 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -170,13 +170,13 @@
             <div class="p-4 m-2">
 
                 <select id="countries"
-                    class="mt-10 bg-gray-50 border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="mt-10 bg-gray-50 text-base font-semibold border border-blue-500 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Filter Level</option>
-                    <option value="US">Junior</option>
-                    <option value="CA">Midlle</option>
-                    <option value="FR">Senior</option>
-                    <option value="DE">Lead Engineer</option>
-                    <option value="DE">Principai</option>
+                    <option class="text-base font-semibold" value="US">Junior</option>
+                    <option class="text-base font-semibold" value="CA">Midlle</option>
+                    <option class="text-base font-semibold" value="FR">Senior</option>
+                    <option class="text-base font-semibold" value="DE">Lead Engineer</option>
+                    <option class="text-base font-semibold" value="DE">Principai</option>
                 </select>
 
             </div>
@@ -184,11 +184,11 @@
             <div class="p-4 m-2">
 
                 <select id="countries"
-                    class="mt-10 bg-gray-50 border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="mt-10 bg-gray-50 text-base font-semibold border border-blue-500 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Filter Pengalaman</option>
-                    <option value="US">0-1 Tahun</option>
-                    <option value="CA">2-4 Tahun</option>
-                    <option value="FR">5+ Tahun</option>
+                    <option class="text-base font-semibold" value="US">0-1 Tahun</option>
+                    <option class="text-base font-semibold" value="CA">2-4 Tahun</option>
+                    <option class="text-base font-semibold" value="FR">5+ Tahun</option>
 
                 </select>
 
@@ -197,10 +197,10 @@
             <div class="p-4 m-2">
 
                 <select id="countries"
-                    class="mt-10 bg-gray-50 border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="mt-10 bg-gray-50 text-base font-semibold border border-blue-500 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Filter Status</option>
-                    <option value="US">On Site</option>
-                    <option value="CA">Non Onsite</option>
+                    <option class="text-base font-semibold" value="US">On Site</option>
+                    <option class="text-base font-semibold" value="CA">Non Onsite</option>
 
                 </select>
 
@@ -209,10 +209,10 @@
             <div class="p-4 m-2">
 
                 <select id="countries"
-                    class="mt-10 bg-gray-50 border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="mt-10 text-base font-semibold bg-gray-50 border border-blue-500 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-30 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Filter Kepegawaian</option>
-                    <option value="us">Active</option>
-                    <option value="CA">Non Active</option>
+                    <option class="text-base font-semibold"value="us">Active</option>
+                    <option class="text-base font-semibold"value="CA">Non Active</option>
 
                 </select>
 
@@ -223,24 +223,24 @@
             <div class="p-4 m-2">
 
                 <select id="countries"
-                    class="mt-10 bg-gray-50 border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="mt-10 text-base font-semibold bg-gray-50 border border-blue-500 text-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Urutkan</option>
-                    <option value=>A-Z</option>
-                    <option value="CA">Z-A</option>
-                    <option value="FR">Level+</option>
-                    <option value="FR">Level-</option>
-                    <option value="DE">Pengalaman+ </option>
-                    <option value="DE">Pengalaman- </option>
-                    <option value="DE">Status On Site</option>
-                    <option value="DE">Status Non Onsite</option>
-                    <option value="DE">Kepegawaian Active</option>
-                    <option value="DE">Kepegawaian Non Active</option>
+                    <option  class="text-base font-semibold "value=>A-Z</option>
+                    <option class="text-base font-semibold "value="CA">Z-A</option>
+                    <option class="text-base font-semibold "value="FR">Level+</option>
+                    <option class="text-base font-semibold "value="FR">Level-</option>
+                    <option class="text-base font-semibold "value="DE">Pengalaman+ </option>
+                    <option class="text-base font-semibold "value="DE">Pengalaman- </option>
+                    <option class="text-base font-semibold "value="DE">Status On Site</option>
+                    <option class="text-base font-semibold "value="DE">Status Non Onsite</option>
+                    <option class="text-base font-semibold "value="DE">Kepegawaian Active</option>
+                    <option class="text-base font-semibold "value="DE">Kepegawaian Non Active</option>
                 </select>
 
 
                 {{-- TAMBAH TALENT --}}
                 <a href="edit.blade.php"
-                    class="w-full p-2.5 h-12 relative bottom-24 right-30 left-30 mb-0 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-9 border border-blue-500 rounded-xl p-4">
+                    class="w-full p-2.5 h-13 relative bottom-24 right-30 left-30 mb-0 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-9 border border-blue-500 rounded-xl p-4">
                     + Tambah Talent
                 </a href>
 

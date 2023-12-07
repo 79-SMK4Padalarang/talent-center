@@ -231,9 +231,8 @@
                                     <div class="justify-center items-center flex">
                                         <div
                                             class="flex items-center p-5 px-2.5 py-2 border-gray-200 rounded-lg dark:border-gray-600">
-                                            <a href="detail_talent.blade.php"><i type="submit"
-                                                class="ml-11 font-semibold px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Simpan
-                                                Perubahan</i></a>
+                                           <a href ="tambah_data.blade.php" class=" text-xm font-semibold ml-20 mt-1 px-6 py-2 bg-white text-blue-600 border border-blue-600 rounded cursor-pointer"> <i class=" fas fa-pen"> </i>
+                                                edit profil</a>
                                         </div>
                                     </div>
                                 </div>
@@ -242,13 +241,13 @@
                                 <div class="justify-start items-start flex">
                                     <div
                                         class="py-1 justify-center items-center gap-5 flex">
-                                        <a href="tambah_data.blade.php" class="text-slate-500 text-base font-medium">Profile
+                                        <a href="detail_talent.blade.php" class="text-slate-500 text-base font-medium">Profile
                                         </a>
                                     </div>
                                 </div>
                                 <div class="justify-start items-start flex">
                                     <div class="py-1 border-b-2 border-blue-500 justify-center items-center gap-5 flex">
-                                        <a href="statistik.blade.php" class="text-blue-500 text-base font-medium">
+                                        <a href="statistik_detail.blade.php" class="text-blue-500 text-base font-medium">
                                             Statistik</a>
                                     </div>
                                 </div>
@@ -260,7 +259,7 @@
 <div class=" mt-8 AnalyticsTopCard w-96 h-24 px-6 py-4 bg-slate-200 rounded-xl shadow justify-between items-start inline-flex">
   <div class="Frame12 flex-col justify-start items-start gap-2 inline-flex">
     <div class="font-semibold text-gray-600 flex items-center justify-center">Total Requested</div>
-    <div class="Frame11 flex-col justify-start items-start gap-2 flex">
+    <div class="Frame11 flex-col justify-start  items-start gap-2 flex">
     <div class="font-semibold text-xl Frame11 flex-col justify-start items-start gap">140</div>
       <div class="Frame10"></div>
     </div>
@@ -280,6 +279,8 @@
   </div>
   <i class=" text-xl rounded-md fas fa-solid fa-thumbs-up"></i></a>
 </div>
+
+
 
 </form>
        
