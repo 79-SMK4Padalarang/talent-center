@@ -53,7 +53,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'collation' => null,
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
@@ -66,16 +66,17 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', '10.10.5.180'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'new_db_talentcenter'),
+            'username' => env('DB_USERNAME', 'usrtalentcenter'),
+            'password' => env('DB_PASSWORD', 'm1QVs3zKymgPduz'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
+            'uuid' => 'Ramsey\Uuid\Uuid'
         ],
 
         'sqlsrv' => [
