@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/EasePack.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CustomEase.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://repo.rachmat.id/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
     <style>
         .hide {
             display: none;
@@ -206,6 +207,9 @@
 
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+             <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+             <script src="{{ asset('js/jquery.js') }}" defer></script>
             <script>
                 //Login Pop-Up
                 const toggleButton = document.querySelector('#toggle-password-button');
@@ -248,6 +252,9 @@
                 if (errorMessage) {
                     my_modal_1.showModal();
                 }
+            </script>
+            
+<script>
 // Function to fetch data from the API and create toggleable buttons
   function fetchDataAndCreateButtons() {
   fetch('http://127.0.0.1:8000/api/tags-management/popular-tags-option-lists')
@@ -372,7 +379,4 @@ fetchDataAndCreateButtons();
         </div>
     </footer>
     <!--Footer End-->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="{{ asset('js/jquery.js') }}" defer></script>
 </body>
