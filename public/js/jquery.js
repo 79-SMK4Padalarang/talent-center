@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
 
     function startAutocomplete(availableTags) {
-        $("#search").autocomplete({
+        $("#search-bar").autocomplete({
             source: availableTags
         });
     }

@@ -342,8 +342,8 @@
                                     <input class="w-full mt-5 rounded-xl border p-2 mb-3" type="email" name="email"
                                         placeholder="Email" />
                                     <div class="relative">
-                                        <input class="w-full rounded-xl border p-2" type="password" name="passwordLogin"
-                                            id="passwordLogin" placeholder="Password" />
+                                        <input class="w-full rounded-xl border p-2" type="password" name="password"
+                                            id="password" placeholder="Password" />
                                         <div
                                             id="toggle-password-button"class="absolute right-3 top-1/2 -translate-y-1/2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -414,8 +414,8 @@
                         method="get"class="w-1/2 appearance-none rounded-full border px-8 leading-tight text-gray-700 shadow focus:outline-none bg-white">
                         @csrf
                         @method('PUT')
-                        <input class="w-3/4 py-4 focus:outline-none focus-visible:outline-none" id="search"
-                            name = "search" type="text" id="title box" type="text"
+                        <input class="w-3/4 py-4 focus:outline-none focus-visible:outline-none" id="search-bar"
+                            name = "search-bar" type="text" id="title box" type="text"
                             placeholder="Try 'ReactJS'" />
                         <button class=" border-none float-right" type="submit">
                             <div class="grid place-items-center h-full w-12 text-grey3 p-3">
@@ -695,7 +695,7 @@
                 <script>
                     //Login Pop-Up
                     const toggleButton = document.querySelector('#toggle-password-button');
-                    const passwordField = document.querySelector('#passwordLogin');
+                    const passwordField = document.querySelector('#password');
                     const closedEye = document.querySelector('#closed-eye');
                     const openEye = document.querySelector('#open-eye');
                     let isPasswordHidden = true;
