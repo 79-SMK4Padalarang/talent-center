@@ -15,6 +15,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/PixiPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
 
+    <!-- Register Need -->
+    <link rel="stylesheet" href="{{ asset('assets/CSS/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/JS/main.js') }}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inter" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira Sans" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('node_modules\flatpickr\dist\flatpickr.css') }}"">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <script src="{{ asset('node_modules\flatpickr\dist\flatpickr.min.js') }}"></script>
 
     <!-- RoughEase, ExpoScaleEase and SlowMo are all included in the EasePack file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/EasePack.min.js"></script>
@@ -61,8 +72,7 @@
                         class="absolute right-4 top-full hidden w-full rounded-lg py-5 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none">
                         <ul class="block lg:flex">
                             <li class="group">
-                                <a href=""
-                                    class="text-white group-hover:text-grey2 mx-8 flex py-2 text-base">Register</a>
+                                <a class="text-white group-hover:text-grey2 mx-8 flex py-2 text-base" onclick= "my_modal_2.showModal()">Register</a>
                             </li>
                             <li class="group">
                                 <button
@@ -84,6 +94,230 @@
         </div>
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="absolute bottom-60 w-full pb-32">
+
+            <dialog id="my_modal_2" class="modal rounded-lg z-50">
+            @if (session('success'))
+                <div style="position:absolute; top: 3px; left: 67px; width: 75%; height: 6%; padding-left: 20px; padding-right: 20px; padding-top: 10px; padding-bottom: 10px; background: #30A952; border-radius: 5px; overflow: hidden; justify-content: center; align-items: center; gap: 50px; display: inline-flex">
+                <div class="center" style="color: #FDFDFD; font-size: 15px; font-family: Inter; font-weight: 700; word-wrap: break-word">{{ session('success') }}</div>
+                </div>
+            @elseif (session('email_error'))
+                <div style="position:absolute; top: 3px; left: 67px; width: 75%; height: 6%; padding-left: 20px; padding-right: 20px; padding-top: 10px; padding-bottom: 10px; background: #CF1D1D; border-radius: 5px; overflow: hidden; justify-content: center; align-items: center; gap: 50px; display: inline-flex">
+                <div class="center" style="color: #FDFDFD; font-size: 15px; font-family: Inter; font-weight: 700; word-wrap: break-word">{{ session('email_error') }}</div>
+                </div>
+            @elseif (session('other_error'))
+                <div style="position:absolute; top: 3px; left: 67px; width: 75%; height: 6%; padding-left: 20px; padding-right: 20px; padding-top: 10px; padding-bottom: 10px; background: #CF1D1D; border-radius: 5px; overflow: hidden; justify-content: center; align-items: center; gap: 50px; display: inline-flex">
+                <div class="center" style="color: #FDFDFD; font-size: 15px; font-family: Inter; font-weight: 700; word-wrap: break-word">{{ session('other_error') }}</div>
+                </div>
+            @endif
+            <p></p>
+            <div class="modal-box">
+                <!-- Register container -->
+                <form name="registerForm" id="registerForm" method="POST" action="api/user-management/users/register" class="center">
+                @csrf
+                <div class="flex justify-center bg-white p-5">
+                    <div class="relative">
+                    <div class="unit">
+                        <div class="unit-a">
+                        <div class="unit-b">
+                            <button class="popup-close absolute right-2.5 top-3 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900" aria-label="Close">
+                            <svg aria-hidden="true" class="h-5 w-5" fill="#000000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" cliprule="evenodd"></path>
+                            </svg>
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                    <p></p>
+                    <!-- form -->
+                    <div class="center top">
+                        <div class="top-1">
+                            <div class="regis">Register</div>
+                            <div class="regis-1">Register so you can choose and request our talent</div>
+                        </div>
+                        <div class="regis-2">
+                            <div class="regis-3">
+                                <div class="regis-4">
+                                    <div class="regis-5">
+                                    <input id="first_name" name="first_name" class="name" placeholder="First Name" value="{{ old('first_name') }}" required="required">
+                                    </div>
+                                    <div class="regis-5">
+                                    <input id="last_name" name="last_name" value="{{ old('last_name') }}" class="name-last" placeholder="Last Name" required="required">
+                                    </div>
+                                </div>
+                                <div class="form">
+                                <input id="email" name="email" value="{{ old('email') }}" class="email-style" type="email" placeholder="Email" required="required">
+                                </div>
+                                <div class="form-1">
+                                    <div class="form-p">
+                                    <input type="password" id="password" name="password" value="{{ old('password') }}" class="form-dup" type="password" placeholder="Password" required="required">
+                                        <span id="passwordDisplay"></span>
+                                        <div onclick="changeIcon(this)" onclick="togglePasswordVisibility()" id="myBtn">
+                                            <i id="faPlus" class="far fa-eye icon fa-regular fa-eye fa-sm" style="position: absolute; left: 430px; top: 257px; color: #848484;"></i>
+                                        </div>
+                                    </div>
+                                    <span></span>
+                                    <div class="pw-again">
+                                        <div class="password-validate">
+                                            <div class="form-7">
+                                                <div class="form-6">
+                                                    <i id="icon1" class="fa-solid fa-times fa-sm invalid" style="position: relative; left: 2px; top: 5px;"></i>
+                                                </div>
+                                            </div>
+                                            <div id="length" class="checkbox invalid" style="position: relative; left: 0px; top: 7px;">Password is at least 8 characters long</div>
+                                        </div>
+                                        <div class="password-validate">
+                                            <div class="form-4">
+                                                <div class="form-5">
+                                                    <i id="icon2" class="fa-solid fa-times fa-sm invalid" style="position: relative; left: 2px; top: -3px;"></i>
+                                                </div>
+                                            </div>
+                                            <div id="letterNumber" class="checkbox invalid" style="position: relative; left: 0px; top: -1px;">Password contains at least one letter and one number</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-1">
+                                    <div class="form-p">
+                                    <input id="passwordAgain" name="passwordAgain" class="form-dup" type="password" value="{{ old('passwordAgain') }}" oninput="maskPassword()" autocomplete="off"  placeholder="Type in your password again" required="required">
+                                        <div onclick="changeIcon2(this)" id="myBtn">
+                                            <i id="faPlus" class="fa-regular fa-eye fa-sm" style="position: absolute; left: 430px; top: 377px; height: 10px; color: #848484;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gender-b">
+                                    <div class="gender-a">
+                                        <div class="gender">Gender</div>
+                                        <div class="gender">
+                                        <div class="bch">
+                                                <div class="bch-a">
+                                                    <input id="sex" name="sex" class="bch-b" type="radio" name="gender" value="Male" checked>
+                                                </div>
+                                                <div style="color: #848484; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word; padding-top: 0px">Male</div>
+                                            </div>
+                                            <div class="bch">
+                                                <div class="bch-a">
+                                                    <input id="sex" name="sex" class="bch-b" type="radio" name="gender" value="female">
+                                                </div>
+                                                <div style="color: #848484; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word; padding-top: 0px;">Female</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back-box">
+                                <input type="text" id="birth_date" name="birth_date" value="{{ old('birth_date') }}" class="box" placeholder="Date of birth" required="required">
+                                    <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        flatpickr("#birth_date", {
+                                            appendTo: document.querySelector("#birth_date").parentNode,
+                                            allowInput: true,
+                                            dateFormat: "d/m/Y",
+                                            onReady: function(selectedDates, dateStr, instance) {
+                                            adjustPosition(instance);
+                                            },
+                                            onChange: function(selectedDates, dateStr, instance) {
+                                            adjustPosition(instance);
+                                            },
+                                        });
+    
+                                        function adjustPosition(instance) {
+                                            const inputRect = birthDateInput.getBoundingClientRect();
+                                            const datePickerRect = instance.calendarContainer.getBoundingClientRect();
+                                            const windowHeight = window.innerHeight;
+    
+                                            if (windowHeight - inputRect.bottom > datePickerRect.height) {
+                                            instance.set("position", "below");
+                                            } else {
+                                            instance.set("position", "above");
+                                            }
+                                        }
+                                    });
+                                    </script>
+                                    <div style="width: 15px; height: 14px; position: absolute; left: 429px; top: 513px;">
+                                        <div style="">
+                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="select-position">
+                                    <label class="select-position-a">
+                                    <select id="client_position_id" name="client_position_id" value="{{ old('client_position_id') }}" class="select-position-b" style="flex: 1 1 0; font-size: 14px; font-family: Inter; font-weight: 450; word-wrap: break-word;" required="required">
+                                            <option value="" disabled="disabled" selected="selected">Client Position</option>
+                                            <div style="align-self: stretch; height: 412px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #848484 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: flex">
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="492b126d-3ab1-4fe3-a962-adc4331768c9">HRD (Human Resources Director)</option>
+                                            </div>
+                                            {{-- <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="2">Manager</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="3">Supervisor</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="4">Staff</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="5">Executive</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="6">Consultant</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="7">Accountant</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="8">Marketing</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="9">Analyst</option>
+                                            </span>
+                                            <span>
+                                                <option style="color: #212121; font-size: 16px; font-family: Fira Sans; font-weight: 400; line-height: 20px; word-wrap: break-word" value="10">Employee</option>
+                                            </span>--}}
+                                        </select>
+                                        <svg>
+                                            <use xlink:href="#select-arrow-down"></use>
+                                        </svg>
+                                        <!-- SVG Sprites-->
+                                        <svg class="">
+                                            <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                                                <polyline points="1 1 5 5 9 1"></polyline>
+                                            </symbol>
+                                        </svg>
+                                    </label>
+                                </div>
+                                <div class="agency-n">
+                                <input id="agency_name" name="agency_name" class="email-style" placeholder="Agency Name" value="{{ old('agency_name') }}" required="required">
+                                </div>
+                                <div class="agency-a">
+                                <textarea id="agency_address" name="agency_address" value="{{ old('agency_address') }}" class="agency-o" placeholder="Agency Address" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-button">
+                        <div class="bg-button-a">
+                            <button class="button-regis" type="submit">
+                                <div class="regis-style">Register</div>
+                            </button>
+                        </div>
+                        <div class="under-regis"></div>
+                        <div style="align-self: center; width: 445px; height: 40px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 15px; display: flex">
+                            <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex">
+                                <a style="flex: 1 1 0; height: 45px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; border-radius: 5px; overflow: hidden; border: 1px #848484 solid; justify-content: center; align-items: center; gap: 7px; display: flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="13px" viewBox="0 0 488 512"><style>svg{fill:#848484}</style><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+                                    <div style="color: #848484; font-size: 14px; font-family: Inter; font-weight: 600; word-wrap: break-word">Continue with Google</div>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div style="align-self: center; padding-top: 45px; justify-content: center; align-items: flex-end; gap: 5px; display: inline-flex; position: absolute; left: 120px; top: 1010px; padding-bottom: 30px;">
+                        <div style="text-align: center; color: #212121; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word">Already have an Account?</div>
+                        <a href="#" onclick="showModal()" style="text-align: center; color: #2C8AD3; font-size: 14px; font-family: Inter; font-weight: 400; word-wrap: break-word">Sign In Here</a>
+                    </div>
+                </div>
+                </form>
+            </dialog>
+        
             <dialog id="my_modal_1" class="modal rounded-lg z-50">
                 <div class="modal-box">
                     <!-- login container -->
@@ -108,8 +342,8 @@
                                     <input class="w-full mt-5 rounded-xl border p-2 mb-3" type="email" name="email"
                                         placeholder="Email" />
                                     <div class="relative">
-                                        <input class="w-full rounded-xl border p-2" type="password" name="password"
-                                            id="password" placeholder="Password" />
+                                        <input class="w-full rounded-xl border p-2" type="password" name="passwordLogin"
+                                            id="passwordLogin" placeholder="Password" />
                                         <div
                                             id="toggle-password-button"class="absolute right-3 top-1/2 -translate-y-1/2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -199,6 +433,259 @@
                     <p class="py-2 px-4 rounded text-white">Popular</p>
                 </div>
 
+                <!-- Register -->
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/datepicker.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script type="text/javascript" src="JS/main.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+                <script>
+                const flatpickrCalendar = document.querySelector(".flatpickr-calendar");
+
+                flatpickrCalendar.style.left = "100px";
+                flatpickrCalendar.style.top = "220px";
+                </script>
+
+                <script>
+                function showModal() {
+                    var previousModal = document.querySelector('dialog[open]');
+                    if (previousModal) {
+                    previousModal.close();
+                    }
+                
+                    var newModal = document.getElementById('my_modal_1');
+                    if (newModal) {
+                    newModal.showModal();
+                    }
+                }
+                </script>
+
+                <script>
+                $( "#registerForm" ).validate({
+                    rules:{
+                        first_name:{
+                            maxlength:100,
+                        },
+                        last_name:{
+                            maxlength:100
+                        },
+                        email:{
+                            email:true,
+                            maxlength: 100
+                        },
+                        password:{
+                            minlength: 8,
+                            maxlength: 50
+                        },
+                        passwordAgain:{
+                            equalTo: "#password",
+                            minlength: 8,
+                            maxlength: 50
+                        },
+                        birth_date:{
+                            required: true
+                        },
+                        client_position_id:{
+                            required: true
+                        },
+                        agency_name:{
+                            maxlength: 100
+                        },
+                        agency_address:{
+                            maxlength: 255
+                        },
+                    },
+                    messages: {
+                        first_name:{
+                            required: "kolom nama tidak boleh kosong",
+                            maxlength: "Panjang kolom tidak boleh lebih dari 100",
+                        },
+                        last_name:{
+                            required: "kolom nama tidak boleh kosong",
+                            maxlength: "Panjang kolom tidak boleh lebih dari 100"
+                        },
+                        email:{
+                            required: "kolom email tidak boleh kosong",
+                            email: "Format kolom email tidak sesuai",
+                            maxlength: "Panjang kolom email tidak boleh lebih dari 100"
+                        },
+                        password:{
+                            required: "kolom password tidak boleh kosong",
+                            minlength: "Password tidak memenuhi kriteria minimal",
+                            maxlength: "Password tidak memenuhi kriteria maksimal"
+                        },
+                        passwordAgain:{
+                            required: "kolom password ulang tidak boleh kosong",
+                            equalTo: "kolom tidak sama sesuai",
+                            minlength: "Password tidak memenuhi kriteria minimal",
+                            maxlength: "Password tidak memenuhi kriteria maksimal"
+                        },
+                        birth_date: {
+                            required: "kolom tanggal lahir tidak boleh kosong",
+                        },
+                        client_position_id: {
+                            required: "kolom posisi tidak boleh kosong",
+                        },
+                        agency_name: {
+                            required: "kolom nama agensi tidak boleh kosong",
+                            maxlength: "Panjang kolom nama agensi tidak boleh lebih dari 100"
+                        },
+                        agency_address: {
+                            required: "kolom alamat agensi tidak boleh kosong",
+                            maxlength: "Panjang kolom nama agensi tidak boleh lebih dari 100"
+                        },
+                    },
+                    submitHandler: function(registerForm) {
+                    var enteredEmail = $("#emailInput").val();
+                    if (enteredEmail.endsWith(".com")) {
+                        // Email valid dan berakhir dengan .com
+                        // Lakukan tindakan yang diinginkan, misalnya submit formulir
+                        form.submit();
+                    } else {
+                        // Email tidak berakhir dengan .com
+                        alert("Alamat email harus berakhir dengan '.com'.");
+                        // Atau lakukan tindakan lain, misalnya berikan pesan kepada pengguna
+                    }
+                    },
+                });
+                </script>
+
+                <script>
+                    function changeIcon(anchor) {
+                        var icon = anchor.querySelector("i");
+                        icon.classList.toggle('fa-eye');
+                        icon.classList.toggle('fa-eye-slash');
+
+                        var x = document.getElementById("password");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
+                    }
+                </script>
+
+                <script>
+                    function changeIcon2(anchor) {
+                        var icon = anchor.querySelector("i");
+                        icon.classList.toggle('fa-eye');
+                        icon.classList.toggle('fa-eye-slash');
+
+                        var y = document.getElementById("passwordAgain");
+                        if (y.type === "password") {
+                            y.type = "text";
+                        } else {
+                            y.type = "password";
+                        }
+                    }
+                </script>
+
+                <script>
+                    function togglePasswordVisibility() {
+                        var x = document.getElementById("myInput");
+                        var displayElement = document.getElementById("passwordDisplay");
+
+                        // Toggle the password input type
+                        if (x.type === "password") {
+                            x.type = "text";
+                            displayElement.textContent = x.value;
+                        } else {
+                            x.type = "password";
+                            displayElement.textContent = '';
+                        }
+                    }
+                </script>
+
+                <script>
+                    const passwordInput = document.getElementById('password');
+                    const icon1 = document.getElementById('icon1');
+                    const icon2 = document.getElementById('icon2');
+
+                    passwordInput.addEventListener('input', function() {
+                        const password = this.value;
+
+                        const containsLetter = /[a-zA-Z]/.test(password);
+                        const containsNumber = /\d/.test(password);
+
+                        // Misalnya, validasi sederhana: jika panjang password lebih dari 8 karakter
+                        if (password.length >= 8) {
+                            // Ganti kelas ikon Font Awesome jika password dianggap benar
+                            icon1.classList.remove('fa-times');
+                            icon1.classList.add('fa-check');
+                            icon1.classList.remove("invalids");
+                            icon1.classList.add("valids");
+                        } else {
+                            // Jika tidak memenuhi syarat, tampilkan ikon default
+                            icon1.classList.remove('fa-check');
+                            icon1.classList.add('fa-times');
+                            icon1.classList.remove("valids");
+                            icon1.classList.add("invalids");
+                        }
+
+                        if (containsLetter && containsNumber) {
+                            // Ganti kelas ikon Font Awesome jika password dianggap benar
+                            icon2.classList.remove('fa-times');
+                            icon2.classList.add('fa-check');
+                            icon2.classList.remove("invalids");
+                            icon2.classList.add("valids");
+                        } else {
+                            // Jika tidak memenuhi syarat, tampilkan ikon default
+                            icon2.classList.remove('fa-check');
+                            icon2.classList.add('fa-times');
+                            icon2.classList.remove("valids");
+                            icon2.classList.add("invalids");
+                        }
+                    });
+                </script>
+            
+                <script>
+                    var myInput = document.getElementById("password");
+                    var letterNumber = document.getElementById("letterNumber");
+                    var length = document.getElementById("length");
+
+                    // When the user starts to type something inside the password field
+                    myInput.onkeyup = function() {
+
+                        // Validate lowercase letters
+                        var lowerCaseLetters = /[a-z]/g;
+                        if(myInput.value.match(lowerCaseLetters)) {
+                            letterNumber.classList.remove("invalids");
+                            letterNumber.classList.add("valids");
+                        } else {
+                            letterNumber.classList.remove("valids");
+                            letterNumber.classList.add("invalids");
+                        }
+                        // Validate numbers
+                        var numbers = /[0-9]/g;
+                        if(myInput.value.match(numbers)) {
+                            letterNumber.classList.remove("invalids");
+                            letterNumber.classList.add("valids");
+                        } else {
+                            letterNumber.classList.remove("valids");
+                            letterNumber.classList.add("invalids");
+                        }
+                        
+                        // Validate length
+                        if(myInput.value.length >= 8) {
+                            length.classList.remove("invalids");
+                            length.classList.add("valids");
+                        } else {
+                            length.classList.remove("valids");
+                            length.classList.add("invalids");
+                        }
+                    }
+                </script>
 
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -208,7 +695,7 @@
                 <script>
                     //Login Pop-Up
                     const toggleButton = document.querySelector('#toggle-password-button');
-                    const passwordField = document.querySelector('#password');
+                    const passwordField = document.querySelector('#passwordLogin');
                     const closedEye = document.querySelector('#closed-eye');
                     const openEye = document.querySelector('#open-eye');
                     let isPasswordHidden = true;
@@ -246,6 +733,18 @@
                     const errorMessage = @json(session('error'));
                     if (errorMessage) {
                         my_modal_1.showModal();
+                    }
+                    const successMessage = @json(session('success'));
+                    if (successMessage) {
+                        my_modal_2.showModal();
+                    }
+                    const emailErrorMessage = @json(session('email_error'));
+                    if (emailErrorMessage) {
+                        my_modal_2.showModal();
+                    }
+                    const otherErrorMessage = @json(session('other_error'));
+                    if (otherErrorMessage) {
+                        my_modal_2.showModal();
                     }
                 </script>
 
