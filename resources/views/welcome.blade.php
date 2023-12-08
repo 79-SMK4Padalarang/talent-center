@@ -85,14 +85,6 @@
         <div class="absolute inset-0 bg-black opacity-50"></div>
         <div class="absolute bottom-60 w-full pb-32">
             <dialog id="my_modal_1" class="modal rounded-lg z-50">
-                @if (session('error'))
-                    <div class="absolute inset-0 bg-black opacity-50"></div>
-                    <div class="absolute bottom-60 w-full pb-52 flex justify-center">
-                        <div class="w-1/4 rounded-sm bg-red-700 py-3 font-normal text-white flex justify-center z-50">
-                            {{ session('error') }}</p>
-                        </div>
-                    </div>
-                @endif
                 <div class="modal-box">
                     <!-- login container -->
                     <form method="post" action="api/user-management/users/sign-in">
@@ -138,6 +130,9 @@
                                             </svg>
                                         </div>
                                     </div>
+                                    @if (session('error'))
+                                        <p style="color:red; font-family: calibri;">{{ session('error') }}</p>
+                                    @endif
 
                                     <button class="w-full rounded-xl bg-blue3 py-2 mt-4 text-white">Login</button>
 
@@ -185,8 +180,8 @@
                         method="get"class="w-1/2 appearance-none rounded-full border px-8 leading-tight text-gray-700 shadow focus:outline-none bg-white">
                         @csrf
                         @method('PUT')
-                        <input class="w-3/4 py-3 focus:outline-none focus-visible:outline-none" id="search-bar"
-                            name = "search-bar" type="text" id="title box" type="text"
+                        <input class="w-3/4 py-4 focus:outline-none focus-visible:outline-none" id="search"
+                            name = "search" type="text" id="title box" type="text"
                             placeholder="Try 'ReactJS'" />
                         <button class=" border-none float-right" type="submit">
                             <div class="grid place-items-center h-full w-12 text-grey3 p-3">
@@ -206,98 +201,97 @@
 
 
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-             <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-             <script src="{{ asset('js/jquery.js') }}" defer></script>
-            <script>
-                //Login Pop-Up
-                const toggleButton = document.querySelector('#toggle-password-button');
-                const passwordField = document.querySelector('#password');
-                const closedEye = document.querySelector('#closed-eye');
-                const openEye = document.querySelector('#open-eye');
-                let isPasswordHidden = true;
-                toggleButton.addEventListener('click', function() {
-                    if (isPasswordHidden) {
-                        passwordField.type = 'text';
-                        openEye.classList.remove('hide');
-                        openEye.classList.add('show');
-                        closedEye.classList.add('hide');
-                        closedEye.classList.remove('show');
-                    } else {
-                        passwordField.type = 'password';
-                        closedEye.classList.remove('hide');
-                        closedEye.classList.add('show');
-                        openEye.classList.add('hide');
-                        openEye.classList.remove('show');
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+                <script src="{{ asset('js/jquery.js') }}" defer></script>
+                <script>
+                    //Login Pop-Up
+                    const toggleButton = document.querySelector('#toggle-password-button');
+                    const passwordField = document.querySelector('#password');
+                    const closedEye = document.querySelector('#closed-eye');
+                    const openEye = document.querySelector('#open-eye');
+                    let isPasswordHidden = true;
+                    toggleButton.addEventListener('click', function() {
+                        if (isPasswordHidden) {
+                            passwordField.type = 'text';
+                            openEye.classList.remove('hide');
+                            openEye.classList.add('show');
+                            closedEye.classList.add('hide');
+                            closedEye.classList.remove('show');
+                        } else {
+                            passwordField.type = 'password';
+                            closedEye.classList.remove('hide');
+                            closedEye.classList.add('show');
+                            openEye.classList.add('hide');
+                            openEye.classList.remove('show');
+                        }
+                        isPasswordHidden = !isPasswordHidden;
+                    });
+                    //Animation Text
+                    $(document).ready(function() {
+                        var lines = $(".txt");
+                        var i = -1;
+
+                        function showNext() {
+                            ++i;
+                            lines.eq(i % lines.length)
+                                .fadeIn(200)
+                                .delay(3000)
+                                .fadeOut(200, showNext);
+                        }
+
+                        showNext();
+                    });
+                    const errorMessage = @json(session('error'));
+                    if (errorMessage) {
+                        my_modal_1.showModal();
                     }
-                    isPasswordHidden = !isPasswordHidden;
-                });
-                //Animation Text
-                $(document).ready(function() {
-                    var lines = $(".txt");
-                    var i = -1;
+                </script>
 
-                    function showNext() {
-                        ++i;
-                        lines.eq(i % lines.length)
-                            .fadeIn(200)
-                            .delay(3000)
-                            .fadeOut(200, showNext);
+                <script>
+                    // Function to fetch data from the API and create toggleable buttons
+                    function fetchDataAndCreateButtons() {
+                        fetch('http://127.0.0.1:8000/api/tags-management/popular-tags-option-lists')
+                            .then(response => response.json())
+                            .then(data => {
+                                const buttonContainer = document.getElementById('button-container');
+                                const searchBar = document.getElementById('search-bar');
+
+                                data.forEach(item => {
+                                    const button = document.createElement('button');
+                                    button.textContent = item.skillset_name;
+
+                                    // Add classes to the button
+                                    button.className = 'bg-white hover:bg-gray-400 text-gray-800 py-2 px-4 rounded';
+
+                                    // Add click event to toggle class and update search bar
+                                    button.onclick = function() {
+                                        button.classList.toggle('selected');
+
+                                        // Update search bar based on button's selection state
+                                        if (button.classList.contains('selected')) {
+                                            searchBar.value += (searchBar.value === '' ? '' : ', ') + item
+                                                .skillset_name;
+                                        } else {
+                                            const valueArray = searchBar.value.split(', ');
+                                            const index = valueArray.indexOf(item.skillset_name);
+                                            if (index !== -1) {
+                                                valueArray.splice(index, 1);
+                                                searchBar.value = valueArray.join(', ');
+                                            }
+                                        }
+                                    };
+
+                                    buttonContainer.appendChild(button);
+                                });
+                            })
+                            .catch(error => console.error('Error fetching data:', error));
                     }
 
-                    showNext();
-                });
-                const errorMessage = @json(session('error'));
-                if (errorMessage) {
-                    my_modal_1.showModal();
-                }
-            </script>
-            
-<script>
-// Function to fetch data from the API and create toggleable buttons
-  function fetchDataAndCreateButtons() {
-  fetch('http://127.0.0.1:8000/api/tags-management/popular-tags-option-lists')
-      .then(response => response.json())
-      .then(data => {
-          const buttonContainer = document.getElementById('button-container');
-          const searchBar = document.getElementById('search-bar');
-
-          data.forEach(item => {
-              const button = document.createElement('button');
-              button.textContent = item.skillset_name;
-
-              // Add classes to the button
-              button.className = 'bg-white hover:bg-gray-400 text-gray-800 py-2 px-4 rounded';
-
-              // Add click event to toggle class and update search bar
-              button.onclick = function() {
-                  button.classList.toggle('selected');
-
-                  // Update search bar based on button's selection state
-                  if (button.classList.contains('selected')) {
-                      searchBar.value += (searchBar.value === '' ? '' : ', ') + item.skillset_name;
-                  } else {
-                      const valueArray = searchBar.value.split(', ');
-                      const index = valueArray.indexOf(item.skillset_name);
-                      if (index !== -1) {
-                          valueArray.splice(index, 1);
-                          searchBar.value = valueArray.join(', ');
-                      }
-                  }
-              };
-
-              buttonContainer.appendChild(button);
-          });
-      })
-      .catch(error => console.error('Error fetching data:', error));
-}
-
-// Call the function when the page is loaded
-fetchDataAndCreateButtons();
-
-
-</script>
+                    // Call the function when the page is loaded
+                    fetchDataAndCreateButtons();
+                </script>
     </section>
     <!---Hero section end--->
     <!--Footer Start-->
